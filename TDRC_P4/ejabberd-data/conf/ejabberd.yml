@@ -1,0 +1,30 @@
+hosts:
+  - "todormartin.ddns.net"
+
+acl:
+  admin:
+    user:
+      - "admin@todormartin.ddns.net"
+
+access_rules:
+  configure:
+    - allow: admin
+  c2s:
+    - allow: all
+
+listen:
+  - port: 5222
+    module: ejabberd_c2s
+    starttls: false
+    starttls_required: false
+    max_stanza_size: 65536
+    shaper: c2s_shaper
+    access: c2s
+  - port: 5269
+    module: ejabberd_s2s_in
+  - port: 5280
+    module: ejabberd_http
+    request_handlers:
+      "/admin": ejabberd_web_admin
+    web_admin: true
+    http_bind: true
