@@ -11,7 +11,15 @@ access_rules:
     - allow: admin
   c2s:
     - allow: all
+  s2s:
+    - allow: all
 
+modules:
+  mod_roster:
+    versioning: true
+  mod_s2s_dialback: {}
+  mod_ping: {}
+  mod_last: {}
 listen:
   - port: 5222
     module: ejabberd_c2s
@@ -19,12 +27,12 @@ listen:
     starttls_required: false
     max_stanza_size: 65536
     shaper: c2s_shaper
-    access: c2s
+
   - port: 5269
     module: ejabberd_s2s_in
+
   - port: 5280
     module: ejabberd_http
     request_handlers:
       "/admin": ejabberd_web_admin
-    web_admin: true
-    http_bind: true
+      "/bosh": mod_bosh
