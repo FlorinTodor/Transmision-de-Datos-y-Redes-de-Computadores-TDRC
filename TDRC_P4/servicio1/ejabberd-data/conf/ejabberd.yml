@@ -20,6 +20,7 @@ modules:
   mod_s2s_dialback: {}
   mod_ping: {}
   mod_last: {}
+
 listen:
   - port: 5222
     module: ejabberd_c2s
@@ -36,3 +37,4 @@ listen:
     request_handlers:
       "/admin": ejabberd_web_admin
       "/bosh": mod_bosh
+
